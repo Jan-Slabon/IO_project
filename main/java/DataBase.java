@@ -7,5 +7,7 @@ public interface DataBase {
 
     Boolean setIsolationLevel(String IsolationLevel);
 
-    Boolean LogIntoAccount(String login, String Password);
+    User LogIntoAccount(String login, String Password);
+
+    void disconect();
 }

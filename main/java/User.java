@@ -1,12 +1,18 @@
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.sql.Date;
 
+@Entity
 public class User {
-    private String  Name;
-    private String  Surename;
+
+    @Id
+    private String Login;
+    private String PassHash;
+    private String Name;
+    private String Surename;
     private Date BirthDate;
     private String Email;
     private String Photo;
-    private int UserID;
 
     @Override
     public String toString() {
@@ -16,17 +22,31 @@ public class User {
                 ", BirthDate=" + BirthDate +
                 ", Email='" + Email + '\'' +
                 ", Photo='" + Photo + '\'' +
-                ", UserID=" + UserID +
                 '}';
     }
 
-    public User(String name, String surename, Date birthDate, String email, String photo, int userID) {
+    public User(String name, String surename, Date birthDate, String email, String photo) {
         Name = name;
         Surename = surename;
         BirthDate = birthDate;
         Email = email;
         Photo = photo;
-        UserID = userID;
+    }
+
+    public String getPassHash() {
+        return PassHash;
+    }
+
+    public void setPassHash(String passHash) {
+        PassHash = passHash;
+    }
+
+    public String getLogin() {
+        return Login;
+    }
+
+    public void setLogin(String login) {
+        Login = login;
     }
 
     public String getName() {
@@ -49,10 +69,6 @@ public class User {
         return Photo;
     }
 
-    public int getUserID() {
-        return UserID;
-    }
-
     public void setName(String name) {
         Name = name;
     }
@@ -71,9 +87,5 @@ public class User {
 
     public void setPhoto(String photo) {
         Photo = photo;
-    }
-
-    public void setUserID(int userID) {
-        UserID = userID;
     }
 }

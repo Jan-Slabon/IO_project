@@ -6,46 +6,30 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
-
-import java.util.Random;
+import javafx.stage.Stage;
 
 public class PaneControler {
+
+
+    DataBase dataBase = new MySQLDB();
+    private StackPaneControler stackPaneControler;
     @FXML
     public Button LoginButton;
     public Button SingUpButton;
     public PasswordField Password;
     public TextField Login;
-    DataBase dataBase = new DataBase() {
-        @Override
-        public Boolean connect() {
-            Random rand = new Random();
-            return true;
-        }
-
-        @Override
-        public Boolean executeQuery(String query) {
-            return null;
-        }
-
-        @Override
-        public Boolean executeQuery(String query, String[] result) {
-            return null;
-        }
-
-        @Override
-        public Boolean setIsolationLevel(String IsolationLevel) {
-            return null;
-        }
-
-        @Override
-        public Boolean LogIntoAccount(String login, String Password) {
-            Random rand = new Random();
-            return true;
-        }
-    };
+    private Stage stage;
 
     public PaneControler() {
 
+    }
+
+    public void setStackPaneControler(StackPaneControler stackPaneControler) {
+        this.stackPaneControler = stackPaneControler;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 
     @FXML
@@ -59,12 +43,16 @@ public class PaneControler {
             LoginButton.setDisable(true);
         }
         EventHandler<ActionEvent> LoginButtonActionHandler = e -> {
-            if (dataBase.LogIntoAccount(Login.getText(), Password.getText())) {
+            User user;
+            user = dataBase.LogIntoAccount(Login.getText(), Password.getText());
+            if (user != null) {
                 System.out.println(Login.getText() + " " + Password.getText());
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainScreen.fxml"));
                 SplitPane splitPane = null;
                 try {
                     splitPane = fxmlLoader.load();
+                    stackPaneControler.stackPane.getChildren().clear();
+                    stackPaneControler.stackPane.getChildren().add(splitPane);
 
                 } catch (Exception expcept) {
 

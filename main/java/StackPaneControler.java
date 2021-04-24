@@ -22,7 +22,8 @@ public class StackPaneControler {
         } catch (Exception exc) {
             System.out.println(exc.getMessage());
         }
+        PaneControler paneControler = loader.getController();
+        paneControler.setStackPaneControler(this);
         stackPane.getChildren().add(pane);
-
     }
 }
