@@ -1,8 +1,12 @@
+package com.classes;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MySQLDB implements DataBase {
     SessionFactory factory;
     Session session;
@@ -16,7 +20,7 @@ public class MySQLDB implements DataBase {
 
     public Boolean connect() {
         try {
-            conf = new Configuration().configure("DataBaseCOnf.xml").addAnnotatedClass(User.class);
+            conf = new Configuration().configure("DataBaseConf.xml").addAnnotatedClass(User.class);
             factory = conf.buildSessionFactory();
             session = factory.openSession();
             return true;

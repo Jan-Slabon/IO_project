@@ -1,3 +1,5 @@
+import com.classes.DataBase;
+import com.classes.User;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -7,11 +9,13 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class PaneControler {
 
-
-    DataBase dataBase = new MySQLDB();
+    ApplicationContext conn = new AnnotationConfigApplicationContext(Conf.class);
+    DataBase dataBase = conn.getBean(DataBase.class);
     private StackPaneControler stackPaneControler;
     @FXML
     public Button LoginButton;

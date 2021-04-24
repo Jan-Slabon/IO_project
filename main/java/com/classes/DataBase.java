@@ -1,3 +1,5 @@
+package com.classes;
+
 public interface DataBase {
     Boolean connect();
 

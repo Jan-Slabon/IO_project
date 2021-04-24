@@ -1,3 +1,5 @@
+package com.classes;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.sql.Date;
@@ -16,7 +18,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "com.classes.User{" +
                 "Name='" + Name + '\'' +
                 ", Surename='" + Surename + '\'' +
                 ", BirthDate=" + BirthDate +
