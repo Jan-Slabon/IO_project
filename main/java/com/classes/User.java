@@ -1,5 +1,6 @@
 package com.classes;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.sql.Date;
@@ -9,11 +10,17 @@ public class User {
 
     @Id
     private String Login;
+    @Column(name = "PasswordHash")
     private String PassHash;
+    @Column(name = "UserName")
     private String Name;
+    @Column(name = "Surename")
     private String Surename;
+    @Column(name = "BirthDate")
     private Date BirthDate;
+    @Column(name = "Email")
     private String Email;
+    @Column(name = "Photo")
     private String Photo;
 
     @Override
@@ -27,12 +34,22 @@ public class User {
                 '}';
     }
 
-    public User(String name, String surename, Date birthDate, String email, String photo) {
+    public User(String login, String name, String surename, Date birthDate, String email, String photo) {
+        Login = login;
         Name = name;
         Surename = surename;
         BirthDate = birthDate;
         Email = email;
         Photo = photo;
+    }
+
+    public User() {
+        Login = null;
+        Name = null;
+        Surename = null;
+        BirthDate = null;
+        Email = null;
+        Photo = null;
     }
 
     public String getPassHash() {

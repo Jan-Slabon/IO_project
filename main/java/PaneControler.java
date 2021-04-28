@@ -59,10 +59,10 @@ public class PaneControler {
                     stackPaneControler.stackPane.getChildren().add(splitPane);
 
                 } catch (Exception expcept) {
-
+                    System.out.println(expcept + " poroblm z zaladowaniem split pane");
                 }
             } else {
-
+                System.out.println("User = null");
             }
         };
         LoginButton.addEventHandler(ActionEvent.ACTION, LoginButtonActionHandler);

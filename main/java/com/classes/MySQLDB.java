@@ -45,10 +45,15 @@ public class MySQLDB implements DataBase {
         Transaction tran = session.beginTransaction();
         User user = session.get(User.class, login);
         tran.commit();
+        System.out.println(user.getPassHash() + " " + user.getName());
         //MessageDigest encryptor = new MessageDigest.getInstance("SHA-256");
-        if (user.getPassHash() == Password) {
+        if (user.getPassHash().equals(Password)) {
+            System.out.println("Udało się zalogować");
             return user;
-        } else return null;
+        } else {
+            System.out.println("Bledny login");
+            return null;
+        }
     }
 
     public void disconect() {
