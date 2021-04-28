@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<Pane xmlns:fx="http://javafx.com/fxml/1" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/15.0.1" fx:controller="PaneControler">
+      <children>
+          <Button fx:id="LoginButton" layoutX="147.0" layoutY="178.0" minWidth="-Infinity" mnemonicParsing="false" prefWidth="100.0" text="Login">
+              <font>
+                  <Font name="Georgia" size="15.0" />
+              </font>
+      </Button>
+          <PasswordField fx:id="Password" layoutX="125.0" layoutY="116.0" />
+          <TextField fx:id="Login" layoutX="123.0" layoutY="64.0" />
+          <Label layoutX="126.0" layoutY="46.0" text="Login">
+              <font>
+                  <Font name="Georgia" size="15.0" />
+              </font>
+          </Label>
+          <Label layoutX="123.0" layoutY="98.0" text="Password">
+              <font>
+                  <Font name="Georgia" size="15.0" />
+              </font>
+          </Label>
+          <Button fx:id="SingUpButton" layoutX="148.0" layoutY="216.0" mnemonicParsing="false" prefWidth="100.0" text="Sing up">
+              <font>
+                  <Font name="Georgia" size="15.0" />
+              </font>
+          </Button>
+      </children>
+  </Pane>
