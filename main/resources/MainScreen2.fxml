@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="164.0" prefWidth="706.0"
+            xmlns="http://javafx.com/javafx/15.0.1" fx:controller="MainScreenControler">
+    <children>
+        <HBox prefHeight="54.0" prefWidth="398.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+              AnchorPane.topAnchor="0.0">
+            <children>
+                <Button fx:id="CreateEventButton" mnemonicParsing="false" prefHeight="100.0" prefWidth="110.0"
+                        text="Dodaj wydarzenie"/>
+                <Button fx:id="ListOfEventButton" mnemonicParsing="false" prefHeight="100.0" prefWidth="120.0"
+                        text="Oglądaj wydarzenia"/>
+                <Button fx:id="UserEventsButton" mnemonicParsing="false" prefHeight="100.0" prefWidth="167.0"
+                        text="Przeglądaj swoje wydarzenia"/>
+                <Button fx:id="UserAttendedEventsButton" mnemonicParsing="false" prefHeight="54.0" prefWidth="305.0"
+                        text="Przeglądaj wydarzenia w których bierzesz udział"/>
+            </children>
+        </HBox>
+        <HBox alignment="BOTTOM_LEFT" layoutY="54.0" prefHeight="110.0" prefWidth="701.0" AnchorPane.bottomAnchor="0.0"
+              AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="54.0">
+            <children>
+                <ImageView fitHeight="118.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@MaleStockPhoto.jpg"/>
+                    </image>
+                </ImageView>
+                <Label fx:id="Name" text="Imie Nazwisko">
+                    <padding>
+                        <Insets right="10.0"/>
+                    </padding>
+                </Label>
+                <Label fx:id="Mail" alignment="CENTER" text="Mail">
+                    <padding>
+                        <Insets right="10.0"/>
+                    </padding>
+                </Label>
+                <Label fx:id="Login" text="Login"/>
+            </children>
+        </HBox>
+    </children>
+</AnchorPane>

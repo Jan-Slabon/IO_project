@@ -1,11 +1,17 @@
 package com.classes;
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
+@Component
 public class User {
 
     @Id
@@ -22,6 +28,10 @@ public class User {
     private String Email;
     @Column(name = "Photo")
     private String Photo;
+    @ManyToMany(mappedBy = "Owners")
+    List<Event> Events = new ArrayList<Event>();
+    @ManyToMany
+    List<Event> Invited = new ArrayList<Event>();
 
     @Override
     public String toString() {
@@ -34,13 +44,14 @@ public class User {
                 '}';
     }
 
-    public User(String login, String name, String surename, Date birthDate, String email, String photo) {
+    public User(String login, String Password, String name, String surename, Date birthDate, String email, String photo) {
         Login = login;
         Name = name;
         Surename = surename;
         BirthDate = birthDate;
         Email = email;
         Photo = photo;
+        PassHash = Password;
     }
 
     public User() {
@@ -50,6 +61,22 @@ public class User {
         BirthDate = null;
         Email = null;
         Photo = null;
+    }
+
+    public List<Event> getInvited() {
+        return Invited;
+    }
+
+    public void setInvited(List<Event> invited) {
+        Invited = invited;
+    }
+
+    public List<Event> getEvents() {
+        return Events;
+    }
+
+    public void setEvents(List<Event> events) {
+        Events = events;
     }
 
     public String getPassHash() {

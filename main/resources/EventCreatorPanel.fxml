@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="439.0" prefWidth="414.0"
+            xmlns="http://javafx.com/javafx/15.0.1" fx:controller="EventCreatorPanelControler">
+    <children>
+        <TextField fx:id="Name" layoutX="16.0" layoutY="42.0"/>
+        <TextField fx:id="Country" layoutX="16.0" layoutY="83.0"/>
+        <TextField fx:id="City" layoutX="16.0" layoutY="125.0"/>
+        <TextField fx:id="Street" layoutX="16.0" layoutY="168.0"/>
+        <TextField fx:id="Number" layoutX="16.0" layoutY="215.0"/>
+        <TextField fx:id="Flat" layoutX="16.0" layoutY="263.0"/>
+        <TextArea fx:id="Description" layoutX="14.0" layoutY="311.0" prefHeight="117.0" prefWidth="200.0"/>
+        <Label layoutX="16.0" layoutY="24.0" text="Nazwa"/>
+        <Label layoutX="15.0" layoutY="68.0" text="Państwo"/>
+        <Label layoutX="16.0" layoutY="109.0" text="Miasto"/>
+        <Label layoutX="15.0" layoutY="151.0" text="Ulica"/>
+        <Label layoutX="16.0" layoutY="194.0" text="Numer"/>
+        <Label layoutX="14.0" layoutY="245.0" text="Mieszkanie"/>
+        <Label layoutX="14.0" layoutY="294.0" text="Opis"/>
+        <Label layoutX="129.0" layoutY="10.0" text="Kreator Wydarzenia">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </Label>
+        <Button fx:id="Submit" layoutX="228.0" layoutY="398.0" mnemonicParsing="false" prefHeight="26.0"
+                prefWidth="109.0" text="Utwórz"/>
+        <DatePicker fx:id="DatePicker" layoutX="198.0" layoutY="263.0"/>
+        <Label layoutX="200.0" layoutY="245.0" text="Data"/>
+    </children>
+</AnchorPane>

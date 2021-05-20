@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/15.0.1"
+            fx:controller="PersonProfileControler">
+    <children>
+        <ImageView fx:id="Photo" fitHeight="150.0" fitWidth="200.0" layoutX="7.0" layoutY="7.0" pickOnBounds="true"
+                   preserveRatio="true" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
+            <image>
+                <Image url="@MaleStockPhoto.jpg"/>
+            </image>
+        </ImageView>
+        <Label fx:id="Name" layoutX="200.0" layoutY="20.0" text="Jan Słaboń" AnchorPane.topAnchor="21.0">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <VBox fx:id="vbox" layoutY="246.0" prefHeight="266.0" prefWidth="415.0" AnchorPane.bottomAnchor="0.0"
+              AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
+        <Label fx:id="Mail" layoutX="199.0" layoutY="72.0" text="slabjan13@gmail.com">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <Label fx:id="Login" layoutX="200.0" layoutY="50.0" text="Login">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+    </children>
+</AnchorPane>

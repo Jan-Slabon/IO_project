@@ -3,13 +3,17 @@ package com.classes;
 public interface DataBase {
     Boolean connect();
 
-    Boolean executeQuery(String query);
+    Boolean AddUserToEvent(User user, User OneAdding, Event event);
 
-    Boolean executeQuery(String query, String[] result);
+    Boolean RemoveUserFromEvent(User user, User OneRemoving, Event event);
 
-    Boolean setIsolationLevel(String IsolationLevel);
+    int CreateEvent(Event event);
+
+    Boolean CreateAccount(User NewUser);
 
     User LogIntoAccount(String login, String Password);
 
     void disconect();
+
+    User getUser(String Login);
 }

@@ -24,13 +24,6 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("Icon.png")));
         primaryStage.show();
-        //initialize(primaryStage);
     }
 
-    public void initialize(Stage primaryStage) {
-        FXMLLoader loader2 = new FXMLLoader();
-        loader2.setLocation(this.getClass().getResource("LoginScreen.fxml"));
-        PaneControler paneControler = loader2.getController();
-        paneControler.setStage(primaryStage);
-    }
 }

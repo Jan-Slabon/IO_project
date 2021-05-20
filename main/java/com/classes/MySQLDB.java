@@ -20,43 +20,92 @@ public class MySQLDB implements DataBase {
 
     public Boolean connect() {
         try {
-            conf = new Configuration().configure("DataBaseConf.xml").addAnnotatedClass(User.class);
+            conf = new Configuration().configure("DataBaseConf.xml").addAnnotatedClass(User.class).addAnnotatedClass(Event.class).addAnnotatedClass(Adres.class);
             factory = conf.buildSessionFactory();
             session = factory.openSession();
             return true;
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return false;
         }
     }
 
-    public Boolean executeQuery(String query) {
-        return true;
+    @Override
+    public Boolean AddUserToEvent(User user, User OneAdding, Event event) {
+        if (event.Owners.contains(OneAdding) && !event.Guests.contains(user)) {
+            user.Invited.add(event);
+            Transaction tran = session.beginTransaction();
+            session.merge(user);
+            tran.commit();
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
-    public Boolean executeQuery(String query, String[] result) {
-        return true;
+    @Override
+    public Boolean RemoveUserFromEvent(User user, User OneRemoving, Event event) {
+        if (event.Owners.contains(OneRemoving) && event.Guests.contains(user)) {
+            user.Invited.remove(event);
+            Transaction tran = session.beginTransaction();
+            session.update(user);
+            tran.commit();
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
-    public Boolean setIsolationLevel(String IsolationLevel) {
-        return true;
+    @Override
+    public int CreateEvent(Event event) {
+        try {
+            Transaction tran = session.beginTransaction();
+            session.merge(event);
+            tran.commit();
+            return event.getEventId();
+        } catch (Exception e) {
+            System.out.println("Error " + e.toString());
+        }
+        return -1;
     }
+
+
+    public Boolean CreateAccount(User user) {
+        try {
+            Transaction tran = session.beginTransaction();
+            session.save(user);
+            tran.commit();
+            return true;
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+        return false;
+    }
+
 
     public User LogIntoAccount(String login, String Password) {
         Transaction tran = session.beginTransaction();
         User user = session.get(User.class, login);
         tran.commit();
-        System.out.println(user.getPassHash() + " " + user.getName());
         //MessageDigest encryptor = new MessageDigest.getInstance("SHA-256");
         if (user.getPassHash().equals(Password)) {
-            System.out.println("Udało się zalogować");
             return user;
         } else {
-            System.out.println("Bledny login");
             return null;
         }
     }
 
     public void disconect() {
         session.close();
+    }
+
+    @Override
+    public User getUser(String Login) {
+        Transaction tran = session.beginTransaction();
+        User user = session.get(User.class, Login);
+        tran.commit();
+        return user;
     }
 }

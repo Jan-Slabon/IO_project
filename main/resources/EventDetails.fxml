@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="143.0" prefWidth="417.0"
+            xmlns="http://javafx.com/javafx/15.0.1" fx:controller="EventDetailsControler">
+   <children>
+      <Label fx:id="Name" layoutX="14.0" layoutY="14.0" text="Label"/>
+      <Label fx:id="Adress" layoutX="14.0" layoutY="47.0" text="Label"/>
+      <Label fx:id="Description" layoutX="14.0" layoutY="81.0" text="Label"/>
+      <Label fx:id="date" layoutX="14.0" layoutY="111.0" text="Date"/>
+      <Button fx:id="AddUser" layoutX="299.0" layoutY="107.0" mnemonicParsing="false" prefHeight="25.0"
+              prefWidth="121.0" text="Dodaj urzytkownika" AnchorPane.rightAnchor="0.0"/>
+      <TextField fx:id="UserLogin" layoutX="148.0" layoutY="107.0" AnchorPane.rightAnchor="120.19999999999999"/>
+      <Button fx:id="DeleteUser" layoutX="301.0" layoutY="69.0" mnemonicParsing="false" prefHeight="25.0"
+              prefWidth="121.0" text="Usuń urzytkownika" AnchorPane.rightAnchor="0.0"/>
+      <TextField fx:id="UserToDelete" layoutX="148.0" layoutY="69.0" AnchorPane.rightAnchor="120.19999999999999"/>
+   </children>
+</AnchorPane>

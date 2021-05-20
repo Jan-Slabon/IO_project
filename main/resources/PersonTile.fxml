@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="84.0" prefWidth="412.0"
+            xmlns="http://javafx.com/javafx/15.0.1" fx:controller="PersonTileControler">
+    <children>
+        <Label fx:id="NameOfEntity" layoutX="341.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity"
+               minHeight="-Infinity" minWidth="-Infinity" prefHeight="18.0" prefWidth="58.0" text="Jan Słaboń"
+               AnchorPane.rightAnchor="14.2"/>
+        <Label layoutX="313.0" layoutY="31.0" text="Polska Katowice" AnchorPane.rightAnchor="14.200000000000003"/>
+        <Label layoutX="368.0" layoutY="49.0" text="21 lat" AnchorPane.rightAnchor="14.2"/>
+        <ImageView fitHeight="108.0" fitWidth="88.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true"
+                   AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <image>
+                <Image url="@MaleStockPhoto.jpg"/>
+            </image>
+        </ImageView>
+    </children>
+</AnchorPane>

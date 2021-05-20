@@ -2,11 +2,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 public class StackPaneControler {
 
-    @FXML
 
+    Stage stage;
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    @FXML
     public StackPane stackPane;
 
     public StackPaneControler() {
@@ -22,8 +29,6 @@ public class StackPaneControler {
         } catch (Exception exc) {
             System.out.println(exc.getMessage());
         }
-        PaneControler paneControler = loader.getController();
-        paneControler.setStackPaneControler(this);
         stackPane.getChildren().add(pane);
     }
 }
