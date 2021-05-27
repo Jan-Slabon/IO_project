@@ -5,16 +5,14 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="164.0" prefWidth="706.0"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="164.0" prefWidth="585.0"
             xmlns="http://javafx.com/javafx/15.0.1" fx:controller="MainScreenControler">
     <children>
-        <HBox prefHeight="54.0" prefWidth="398.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+        <HBox prefHeight="54.0" prefWidth="587.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
               AnchorPane.topAnchor="0.0">
             <children>
                 <Button fx:id="CreateEventButton" mnemonicParsing="false" prefHeight="100.0" prefWidth="110.0"
                         text="Dodaj wydarzenie"/>
-                <Button fx:id="ListOfEventButton" mnemonicParsing="false" prefHeight="100.0" prefWidth="120.0"
-                        text="Oglądaj wydarzenia"/>
                 <Button fx:id="UserEventsButton" mnemonicParsing="false" prefHeight="100.0" prefWidth="167.0"
                         text="Przeglądaj swoje wydarzenia"/>
                 <Button fx:id="UserAttendedEventsButton" mnemonicParsing="false" prefHeight="54.0" prefWidth="305.0"

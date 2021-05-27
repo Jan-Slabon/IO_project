@@ -21,13 +21,12 @@ public class Event {
     @ManyToMany(mappedBy = "Invited")
     List<User> Guests = new ArrayList<User>();
 
-    public Event(int eventId, com.classes.Adres adres, String name, String description, ArrayList<User> owners, ArrayList<User> guests) {
+    public Event(int eventId, com.classes.Adres adres, String name, String description, ArrayList<User> owners) {
         EventId = eventId;
         Adres = adres;
         Name = name;
         Description = description;
         Owners = owners;
-        Guests = guests;
     }
 
     public Event() {

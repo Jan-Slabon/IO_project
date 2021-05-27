@@ -12,12 +12,13 @@ class MySQLDBTest {
     void CreateUserTestGoodData() {
         MySQLDB db = new MySQLDB();
         db.connect();
-        String login = "otherLogin";
+        String login = "otherLogin1";
         String Password = "strongPassword";
         Date data = new Date(System.currentTimeMillis());
-        boolean result = db.CreateAccount(login, Password, "John", "Doe", data, "dobrymail@gmail.com", null);
-        User user = db.LogIntoAccount(login, Password);
-        assertEquals(result, user != null);
+        User user = new User(login, Password, "John", "Doe", data, "dobrymail@gmail.com", null);
+        boolean result = db.CreateAccount(user);
+        User user2 = db.LogIntoAccount(login, Password);
+        assertEquals(result, user2 != null);
         db.disconect();
     }
 
@@ -28,8 +29,10 @@ class MySQLDBTest {
         String login = "otherLogin";
         String Password = "strongPassword";
         Date data = new Date(System.currentTimeMillis());
-        db.CreateAccount(login, Password, "John", "Doe", data, "dobrymail@gmail.com", null);
-        boolean result = db.CreateAccount(login, Password, "John", "Doe", data, "dobrymail@gmail.com", null);
+        User user1 = new User(login, Password, "John", "Doe", data, "dobrymail@gmail.com", null);
+        User user2 = new User(login, Password, "John", "Doe", data, "dobrymail@gmail.com", null);
+        db.CreateAccount(user1);
+        boolean result = db.CreateAccount(user2);
         assertFalse(result);
         db.disconect();
     }
@@ -39,7 +42,8 @@ class MySQLDBTest {
         MySQLDB db = new MySQLDB();
         db.connect();
         Date data = new Date(System.currentTimeMillis());
-        boolean result = db.CreateAccount("sampleLogin", "samplePassword", "John", "Doe", data, "zlastrukturamaila", null);
+        User user = new User("sampleLogin", "samplePassword", "John", "Doe", data, "zlastrukturamaila", null);
+        boolean result = db.CreateAccount(user);
         assertFalse(result);
         db.disconect();
     }
@@ -50,9 +54,14 @@ class MySQLDBTest {
         db.connect();
         String login = "ownerLogin";
         String Password = "ownerPassword";
-        db.CreateAccount(login, Password, "name", "surename", null, "validmail@wp.pl", null);
-        int id = db.CreateEvent(new Date(System.currentTimeMillis()), "Street Name,Exact Adress ,City name", "This is my event", login);
-        assertTrue(id > 0);
+        User FirstUser = new User(login, Password, "name", "surename", null, "validmail@wp.pl", null);
+        db.CreateAccount(FirstUser);
+        Adres adres = new Adres("Pl", "Kato", "wojewodzka", 1, 2);
+        ArrayList<User> owner = new ArrayList<User>();
+        owner.add(FirstUser);
+        Event event = new Event(0, adres, "Impreza", "opis", owner);
+        int result = db.CreateEvent(event);
+        assertTrue(result >= 0);
         db.disconect();
     }
 
@@ -60,14 +69,20 @@ class MySQLDBTest {
     void AddUserToEventByEventOwner() {
         MySQLDB db = new MySQLDB();
         db.connect();
-        String login = "ownerLogin";
+        String login = "ownerLogin1";
         String Password = "ownerPassword";
         String userLogin = "userLogin";
         String userPassword = "userPassword";
-        db.CreateAccount(login, Password, "name", "surename", null, "validmail@wp.pl", null);
-        db.CreateAccount(userLogin, userPassword, "name", "surename", null, "validmail@wp.pl", null);
-        int id = db.CreateEvent(new Date(System.currentTimeMillis()), "Street Name,Exact Adress ,City name", "This is my event", login);
-        boolean result = db.AddUserToEvent(userLogin, login, Password, id);
+        User FirstUser = new User(login, Password, "name", "surename", null, "validmail@wp.pl", null);
+        User SecondUser = new User(userLogin, userPassword, "name", "surename", null, "validmail@wp.pl", null);
+        db.CreateAccount(FirstUser);
+        db.CreateAccount(SecondUser);
+        Adres adres = new Adres("Pl", "Kato", "wojewodzka", 1, 2);
+        ArrayList<User> owner = new ArrayList<User>();
+        owner.add(FirstUser);
+        Event event = new Event(0, adres, "Impreza", "opis", owner);
+        db.CreateEvent(event);
+        boolean result = db.AddUserToEvent(SecondUser, FirstUser, event);
         assertTrue(result);
         db.disconect();
     }
@@ -76,9 +91,9 @@ class MySQLDBTest {
     void AddUserToEventByStranger() {
         MySQLDB db = new MySQLDB();
         db.connect();
-        String login = "ownerLogin";
+        String login = "ownerLogin2";
         String Password = "ownerPassword";
-        String userLogin = "userLogin";
+        String userLogin = "userLogin1";
         String userPassword = "userPassword";
         String thirdLogin = "anotherLogin";
         String ThirdPassword = "anotherPassword";
@@ -88,26 +103,38 @@ class MySQLDBTest {
         db.CreateAccount(FirstUser);
         db.CreateAccount(SecondUser);
         db.CreateAccount(ThirdUser);
-        Event event = new Event();
-        int id = db.CreateEvent(event);
+        Adres adres = new Adres("Pl", "Kato", "wojewodzka", 1, 2);
+        ArrayList<User> owner = new ArrayList<User>();
+        owner.add(FirstUser);
+        Event event = new Event(0, adres, "Impreza", "opis", owner);
+        db.CreateEvent(event);
         boolean result = db.AddUserToEvent(ThirdUser, SecondUser, event);
         assertFalse(result);
         db.disconect();
     }
 
     @Test
-    void RemoveUserFromEventByOwner() {
+    void RemoveUserFromEventByOwner() throws Exception {
         MySQLDB db = new MySQLDB();
         db.connect();
-        String login = "ownerLogin";
+        String login = "ownerLogin3";
         String Password = "ownerPassword";
-        String userLogin = "userLogin";
+        String userLogin = "userLogin2";
         String userPassword = "userPassword";
-        db.CreateAccount(login, Password, "name", "surename", null, "validmail@wp.pl", null);
-        db.CreateAccount(userLogin, userPassword, "name", "surename", null, "validmail@wp.pl", null);
-        int id = db.CreateEvent(new Date(System.currentTimeMillis()), "Street Name,Exact Adress ,City name", "This is my event", login);
-        db.AddUserToEvent(userLogin, login, Password, id);
-        boolean result = db.RemoveUserFromEvent(userLogin, login, Password, id);
+        User user1 = new User(login, Password, "name", "surename", null, "validmail@wp.pl", null);
+        User user2 = new User(userLogin, userPassword, "name", "surename", null, "validmail@wp.pl", null);
+        db.CreateAccount(user1);
+        db.CreateAccount(user2);
+        Adres adres = new Adres("Pl", "Kato", "wojewodzka", 1, 2);
+        ArrayList<User> owner = new ArrayList<User>();
+        owner.add(user1);
+        Event event = new Event(0, adres, "Impreza", "opis", owner);
+        int id = db.CreateEvent(event);
+        Thread.sleep(5000);
+        Event newEvent = db.getEvent(id);
+        System.out.println(newEvent == null);
+        db.AddUserToEvent(user2, user1, event);
+        boolean result = db.RemoveUserFromEvent(user2, user1, event);
         assertTrue(result);
         db.disconect();
     }
@@ -116,11 +143,11 @@ class MySQLDBTest {
     void RemoveUserFromEventByStranger() {
         MySQLDB db = new MySQLDB();
         db.connect();
-        String login = "ownerLogin";
+        String login = "ownerLogin4";
         String Password = "ownerPassword";
-        String userLogin = "userLogin";
+        String userLogin = "userLogin3";
         String userPassword = "userPassword";
-        String thirdLogin = "anotherLogin";
+        String thirdLogin = "anotherLogin1";
         String ThirdPassword = "anotherPassword";
         User user1 = new User(login, Password, "name", "surename", null, "validmail@wp.pl", null);
         User user2 = new User(userLogin, userPassword, "name", "surename", null, "validmail@wp.pl", null);
@@ -131,9 +158,9 @@ class MySQLDBTest {
         Adres adres = new Adres("Pl", "Kato", "wojewodzka", 1, 2);
         ArrayList<User> owner = new ArrayList<User>();
         owner.add(user1);
-        Event event = new Event(0, adres, "Impreza", "opis", owner, null);
+        Event event = new Event(0, adres, "Impreza", "opis", owner);
         db.CreateEvent(event);
-        db.AddUserToEvent(user1, user3, event);
+        db.AddUserToEvent(user3, user1, event);
         boolean result = db.RemoveUserFromEvent(user3, user2, event);
         assertFalse(result);
         db.disconect();

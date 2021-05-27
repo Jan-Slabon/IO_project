@@ -33,7 +33,7 @@ public class EventCreatorPanelControler {
         ArrayList<User> userList = new ArrayList<User>();
         userList.add(user);
         Adres adres = new Adres(Country.getText(), City.getText(), Street.getText(), Integer.parseInt(Number.getText()), Integer.parseInt(Flat.getText()));
-        Event event = new Event(0, adres, Name.getText(), Description.getText(), userList, null);
+        Event event = new Event(0, adres, Name.getText(), Description.getText(), userList);
         event.setData(Date.valueOf(DatePicker.getValue()));
         dataBase.connect();
         dataBase.CreateEvent(event);

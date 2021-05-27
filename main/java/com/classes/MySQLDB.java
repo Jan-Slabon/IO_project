@@ -32,10 +32,10 @@ public class MySQLDB implements DataBase {
 
     @Override
     public Boolean AddUserToEvent(User user, User OneAdding, Event event) {
-        if (event.Owners.contains(OneAdding) && !event.Guests.contains(user)) {
+        if (event.Owners.contains(OneAdding) && !user.Invited.contains(event)) {
             user.Invited.add(event);
             Transaction tran = session.beginTransaction();
-            session.merge(user);
+            session.update(user);
             tran.commit();
             return true;
         } else {
@@ -46,7 +46,9 @@ public class MySQLDB implements DataBase {
 
     @Override
     public Boolean RemoveUserFromEvent(User user, User OneRemoving, Event event) {
-        if (event.Owners.contains(OneRemoving) && event.Guests.contains(user)) {
+        System.out.println(event.Owners.contains(OneRemoving));
+        System.out.println(user.Invited.contains(event));
+        if (event.Owners.contains(OneRemoving) && user.Invited.contains(event)) {
             user.Invited.remove(event);
             Transaction tran = session.beginTransaction();
             session.update(user);
@@ -107,5 +109,12 @@ public class MySQLDB implements DataBase {
         User user = session.get(User.class, Login);
         tran.commit();
         return user;
+    }
+
+    public Event getEvent(int id) {
+        Transaction tran = session.beginTransaction();
+        Event event = session.get(Event.class, id);
+        tran.commit();
+        return event;
     }
 }
