@@ -40,6 +40,9 @@ public class EventDetailsControler {
         try {
             dataBase.connect();
             User newUser = dataBase.getUser(UserToDelete.getText());
+            newUser.getInvited().forEach(event1 -> {
+                System.out.println(event1 == event);
+            });
             if (newUser == null) throw new Exception("no such User");
             dataBase.RemoveUserFromEvent(newUser, user, event);
             dataBase.disconect();

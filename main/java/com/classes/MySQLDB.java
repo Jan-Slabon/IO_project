@@ -46,12 +46,20 @@ public class MySQLDB implements DataBase {
 
     @Override
     public Boolean RemoveUserFromEvent(User user, User OneRemoving, Event event) {
-        System.out.println(event.Owners.contains(OneRemoving));
-        System.out.println(user.Invited.contains(event));
-        if (event.Owners.contains(OneRemoving) && user.Invited.contains(event)) {
-            user.Invited.remove(event);
+        boolean contains = false;
+        for (int i = 0; i < user.getInvited().size(); i++)
+            if (user.getInvited().get(i).getEventId() == event.getEventId()) {
+                contains = true;
+                break;
+            }
+        if (event.Owners.contains(OneRemoving) && contains) {
+            for (int i = 0; i < user.getInvited().size(); i++)
+                if (user.getInvited().get(i).getEventId() == event.getEventId()) {
+                    user.getInvited().remove(i);
+                    break;
+                }
             Transaction tran = session.beginTransaction();
-            session.update(user);
+            session.merge(user);
             tran.commit();
             return true;
         } else {

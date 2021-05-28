@@ -1,3 +1,4 @@
+import com.classes.DataBase;
 import com.classes.User;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -8,6 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class MainScreenControler {
 
@@ -20,6 +23,8 @@ public class MainScreenControler {
     public Label Login;
     public Label Name;
     public Label Mail;
+    ApplicationContext conn = new AnnotationConfigApplicationContext(Conf.class);
+    DataBase dataBase = conn.getBean(DataBase.class);
     User user;
     EventHandler<ActionEvent> UserEvents = e -> {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ListOfUserEvents.fxml"));
