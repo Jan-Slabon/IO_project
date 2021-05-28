@@ -8,6 +8,21 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MySQLDBTest {
+
+    @Test
+    void BadMailTest() {
+        MailTest test = new MailTest();
+        boolean result = test.ValidateEmail("badmail");
+        assertFalse(result);
+    }
+
+    @Test
+    void GoodMailTest() {
+        MailTest test = new MailTest();
+        boolean result = test.ValidateEmail("goodmail@wp.pl");
+        assertTrue(result);
+    }
+
     @Test
     void CreateUserTestGoodData() {
         MySQLDB db = new MySQLDB();
