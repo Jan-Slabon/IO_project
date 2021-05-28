@@ -32,7 +32,13 @@ public class MySQLDB implements DataBase {
 
     @Override
     public Boolean AddUserToEvent(User user, User OneAdding, Event event) {
-        if (event.Owners.contains(OneAdding) && !user.Invited.contains(event)) {
+        boolean contains = false;
+        for (int i = 0; i < user.getInvited().size(); i++)
+            if (user.getInvited().get(i).getEventId() == event.getEventId()) {
+                contains = true;
+                break;
+            }
+        if (event.Owners.contains(OneAdding) && !contains) {
             user.Invited.add(event);
             Transaction tran = session.beginTransaction();
             session.update(user);
