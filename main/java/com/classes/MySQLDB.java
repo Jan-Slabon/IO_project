@@ -4,6 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -11,6 +12,8 @@ public class MySQLDB implements DataBase {
     SessionFactory factory;
     Session session;
     Configuration conf;
+    @Autowired
+    IMailTest test;
 
     public MySQLDB() {
         factory = null;
@@ -90,6 +93,8 @@ public class MySQLDB implements DataBase {
 
     public Boolean CreateAccount(User user) {
         try {
+            if (!test.ValidateEmail(user.getEmail()))
+                throw new Exception("Bad mail");
             Transaction tran = session.beginTransaction();
             session.save(user);
             tran.commit();
